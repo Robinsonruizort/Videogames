@@ -1,0 +1,50 @@
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+.Card {
+    color: aliceblue;
+    width: 1300px;
+    height: 450px;
+    margin: 5px;   
+    background-color: black;
+    background-size: 100%;
+    background-attachment: fixed;
+    opacity: 80%;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    font-size: 0.6rem;
+    padding: 20px 30px;
+    gap: 50px;
+}
+
+.img{
+    padding-top: 30px;
+    max-width: 60%;
+    max-height: 70%;
+    top: 0;
+    left: 0;
+}
+.general{
+    display: inline-block;
+    margin-top: 100px;
+}
+.btn {
+    width: 70px;
+    height: 30px;
+    padding: 0 12px;
+    font-size: 14px;
+    color: #000;
+    outline: none;
+    border: 1px solid silver;
+    border-radius: 30px;
+    text-align: center;
+    background-color: white;
+    }
+    
+    .btn:hover {
+    background-color: #00BFFF;
+    color: white;
+    cursor: pointer;
+    }

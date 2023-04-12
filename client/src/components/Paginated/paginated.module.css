@@ -1,0 +1,13 @@
+.paginated{
+    margin-top: 40px;
+    display: flex; flex-direction: row; list-style: none;
+    align-items: center; justify-content: center; gap: 2rem;
+    color: yellow;
+    padding: 0.2rem;
+    background-color: black;
+    opacity: 80%;
+}
+
+.pag{
+    cursor: pointer;
+}

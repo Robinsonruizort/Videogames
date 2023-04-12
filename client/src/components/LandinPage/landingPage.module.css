@@ -1,0 +1,85 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Press+Start+2P&display=swap');
+
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-attachment: fixed;
+    background-image: url(C:\Users\robin\OneDrive\Escritorio\Videogames\PI-Videogames-main\client\src\components\LandinPage\Background.jpg);
+}
+
+.information {
+    align-items: center; justify-content: center; height: 100vh;
+    margin-top: 10%;
+    
+}
+.title {
+    animation: changeColor 5s infinite;
+    font-family: sans-serif;
+    font-size: 2.5rem;
+}
+@keyframes changeColor {
+    0% {
+        color: #33DAFF;
+    }
+    45% {
+        color: #33FF7D;
+    }
+    80% {
+        color: white;
+    }
+    100% {
+        color: #33DAFF;
+    }
+}
+
+.button {
+    border-radius: 50%;
+    transition: 1.5s;
+    padding: 70px 25px;
+    border: hidden;
+    background-color:#09f;
+    animation-name: color-animation;
+    animation-duration: 7s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    border-style: dashed;
+  }
+  
+  @keyframes color-animation {
+    0% {
+      background-color: #020024;
+      color: #fff;
+    }
+    45% {
+      background-color: #090979;
+      color: #fff;
+    }
+    100% {
+      background-color: #0648a2;
+      color: #fff;
+    }
+  }
+
+.link {
+    text-decoration: none;
+    color: white;
+    font-size: 0.7rem;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.button:hover {
+    background-image: linear-gradient(
+        150deg,
+        #9500ff,
+        #09f,
+        #00DDFF
+    );
+
+}
+
+
+

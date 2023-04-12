@@ -1,0 +1,37 @@
+.search {
+    position: flex;
+    padding: 5px;
+    text-align: center;
+    align-items: center; justify-content: center;
+}
+
+.search input {
+width: 240px;
+height: 30px;
+padding: 0 20px;
+font-size: 14px;
+color: #000;
+outline: none;
+border: 1px solid silver;
+border-radius: 30px;
+
+}
+
+.btn {
+width: 70px;
+height: 30px;
+padding: 0 12px;
+font-size: 14px;
+color: #000;
+outline: none;
+border: 1px solid silver;
+border-radius: 30px;
+text-align:justify;
+background-color: white;
+}
+
+.btn:hover {
+background-color: #00BFFF;
+color: white;
+cursor: pointer;
+}
