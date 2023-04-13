@@ -1,30 +1,18 @@
 const { DB_API_KEY } = process.env;
 const axios = require("axios");
-const { Videogame, Genre } = require("../db");
+const { Videogame } = require("../db");
+const { Op } = require('sequelize');
+
 
 const getVideogamesName = async (req, res) => {
   const { name } = req.query;
   try {
     const videogamesBD = await Videogame.findAll({
-      where: { name },
-
-    //   where: {
-    //     name: {
-    //       [Op.eq]: name
-    //     }
-
-    //THIS IS A EQUALITY OPERATOR This is from sequelize and is to allow the function to only return exact matches
-
-
-      include: [
-        {
-          model: Genre,
-          attributes: ["name"],
-          through: {
-            attributes: [],
-          },
-        },
-      ],
+        where: {
+        name: {
+        [Op.like]: `%${name}%`
+        }
+      }
     });
 
     const response = await axios(
@@ -54,5 +42,47 @@ const getVideogamesName = async (req, res) => {
 };
 
 module.exports = { getVideogamesName };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      // where: { name },
+
+    //   where: {
+    //     name: {
+    //       [Op.eq]: name
+    //     }
+
+    //THIS IS A EQUALITY OPERATOR This is from sequelize and is to allow the function to only return exact matches
+    //   include: [
+    //     {
+    //       model: Genre,
+    //       attributes: ["name"],
+    //       through: {
+    //         attributes: [],
+    //       },
+    //     },
+    //   ],
+    // });
 
 

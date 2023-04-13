@@ -87,15 +87,7 @@ const CreateVideogame = () => {
       try {
         const response =  axios.post(`http://localhost:3001/videogames/`, input)
         alert("Videogame created")
-        // setInput({
-        //   name: "",
-        //   description:"",
-        //   platforms: [],
-        //   image:"",
-        //   releaseDate: "",
-        //   rating: 0.0,
-        //   genres:[]
-        //   })
+
       } catch (error) { 
         window.alert(error.message);
       }
