@@ -72,12 +72,11 @@ const getVideogamesName = (payload) => {
 //  }
 
 
- const postVideogame = (payload) =>{
-    return async function (dispatch){
-        const response = await axios.post(`http://localhost:3001/videogames/`, payload)
-        return response;
-    }
- }
+//  const postVideogame = (payload) =>{
+//     return async function (){
+//         const response = await axios.post(`http://localhost:3001/videogames/`, payload)
+//     }
+//  }
 
 const orderBy = (payload) => {
     return {
@@ -105,4 +104,4 @@ const orderRating = (payload) => {
         payload
     }
 }
-export { getVideogames, filterByGenre, filterByCreated, getVideogamesName, getGenres, orderBy, postVideogame, getVideogameId, orderRating} ;
+export { getVideogames, filterByGenre, filterByCreated, getVideogamesName, getGenres, orderBy, getVideogameId, orderRating} ;

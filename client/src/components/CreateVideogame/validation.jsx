@@ -22,8 +22,8 @@ const validate = (input) => {
   if (input.genres.length === 0) {
     errors.genres = "At least one genre is required";
   }
-  if (input.platform.length === 0) {
-    errors.platform = "At least one platform is required";
+  if (input.platforms.length === 0) {
+    errors.platforms = "At least one platform is required";
   }
   return errors;
 };

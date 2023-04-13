@@ -4,13 +4,14 @@ const { Op } = require('sequelize');
 const postVideogames = async (req, res) => {
     const { name, description, platforms, releaseDate, createdInDb, rating, genres, image } = req.body;
 
-    console.log(genres);
+    // console.log(genres);
 
-    if(typeof rating !== "undefined" && (typeof rating !== "number" || rating < 1 || rating > 5)) {
-        return res.status(400).send("Invalid rating")
-    }
+    // if(typeof rating !== "undefined" && (typeof rating !== "number" || rating < 1 || rating > 5)) {
+    //     return res.status(400).send("Invalid rating")
+    // }
 
     try {
+      console.log(req.body);
         const newVideogame = await Videogame.create({
             name,
             description,
@@ -20,7 +21,9 @@ const postVideogames = async (req, res) => {
             image,
             platforms,
         });
-        
+
+
+        console.log("Hasta aqui llegamos");
         const genreNames = await Genre.findAll({
             where: {
               id: {

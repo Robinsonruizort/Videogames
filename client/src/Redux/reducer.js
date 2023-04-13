@@ -64,11 +64,11 @@ const reducer = (state = initialState, { type, payload}) => {
                 }
             }
             
-            case POST_VIDEOGAMES:{
-                return {
-                    ...state
-                }
-            }
+            // case POST_VIDEOGAMES:{
+            //     return {
+            //         ...state
+            //     }
+            // }
 
             case GET_VIDEOGAME_ID: {
                 return {

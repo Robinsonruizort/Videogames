@@ -1,9 +1,17 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { getGenres, postVideogame } from "../../Redux/actions";
+import { getGenres } from "../../Redux/actions";
 import validate from "./validation";
 import style from "./CreateVideogame.module.css";
+import axios from "axios";
+
+
+// const postVideogame = () =>{
+// //     return async function (){
+// //         const response = await axios.post(`http://localhost:3001/videogames/`, payload)
+// //     }
+// //  }
 
 
 
@@ -16,7 +24,7 @@ const CreateVideogame = () => {
     const [input, setInput] = useState({
             name: "",
             description:"",
-            platform: [],
+            platforms: [],
             image:"",
             releaseDate: "",
             rating: 0.0,
@@ -46,10 +54,10 @@ const CreateVideogame = () => {
     }  
     const handleSelectPlatform = (e) => {
         const selectedPlatform = e.target.value;
-        if(!input.platform.includes(selectedPlatform)){
+        if(!input.platforms.includes(selectedPlatform)){
           setInput({
             ...input,
-            platform: [...input.platform, e.target.value]
+            platforms: [...input.platforms, e.target.value]
         })
     }
   }
@@ -61,11 +69,11 @@ const CreateVideogame = () => {
     });
   };
   
-  const handleDeletePlatform = (platform) => {
-    const updatedPlatforms = input.platform.filter((p) => p !== platform);
+  const handleDeletePlatform = (platforms) => {
+    const updatedPlatforms = input.platforms.filter((p) => p !== platforms);
     setInput({
       ...input,
-      platform: updatedPlatforms,
+      platforms: updatedPlatforms,
     });
   };
 
@@ -73,28 +81,42 @@ const CreateVideogame = () => {
     dispatch(getGenres()) ;
     }, [])
     
-    const handleSubmit = (e) =>{
+    
+    const handleSubmit = async (e) =>{
       e.preventDefault();
-      dispatch(postVideogame(input))
-      alert("Videogame created")
-      setInput({
-        name: "",
-        description:"",
-        platform: [],
-        image:"",
-        releaseDate: "",
-        rating: 0.0,
-        genres:[]
-        })
+      try {
+        const response =  axios.post(`http://localhost:3001/videogames/`, input)
+        alert("Videogame created")
+        // setInput({
+        //   name: "",
+        //   description:"",
+        //   platforms: [],
+        //   image:"",
+        //   releaseDate: "",
+        //   rating: 0.0,
+        //   genres:[]
+        //   })
+      } catch (error) { 
+        window.alert(error.message);
       }
-      
+    }
+
       const hasErrors = Object.keys(errors).length > 0;
+
+      let hasInputs =false;
+      const inputs = document.querySelectorAll('input[type="text"]');
+      for (let i = 0; i < inputs.length; i++) {
+        if (inputs[i].value.trim() !== '') {
+          hasInputs = true;
+          break;
+        }
+      }
 
       const handleClick = () => {
         if (hasErrors) {
           alert('There are errors in the form. Please check your inputs.');
         }
-        handleSubmit();
+        // handleSubmit();
       }
       return (
         <div>
@@ -110,63 +132,63 @@ const CreateVideogame = () => {
                     {errors.description && <p style ={{color: "black", fontStyle: "italic"}}>{errors.description}</p>}
                     <br />
                     <label htmlFor="">ReleaseDate: </label>
-                    <input className={style.input}type="date" value= {input.releaseDate} name="releaseDate" placeholder="YYYY-MM-DD"  onChange={handleChange}/>
+                    <input className={style.input}type="text" value= {input.releaseDate} name="releaseDate" placeholder="YYYY-MM-DD"  onChange={handleChange}/>
                     {errors.releaseDate && <p style ={{color: "black", fontStyle: "italic"}}>{errors.releaseDate}</p>}
                     <br />
                     <label htmlFor="">Rating: </label>
-                    <input className={style.input}type="number" value={input.rating} name="rating" placeholder="Add a rating (example: 5.00)" min="0.0" max="5.0" onChange={handleChange}/>
+                    <input className={style.input} type="text" value={input.rating} name="rating" placeholder="Add a rating (example: 5.00)" min="0.0" max="5.0" onChange={handleChange}/>
                     {errors.rating && <p style ={{color: "black", fontStyle: "italic"}}>{errors.rating}</p>}
                     <br />
-                    <label htmlFor="">Image: </label>
-                    <input className={style.input}type="text" value={input.image} name="image" placeholder="Add picture URL" onChange={handleChange}/>
-                    {errors.image && <p style ={{color: "black", fontStyle: "italic"}}>{errors.image}</p>}
-                    <br />
                     <label htmlFor="">Platforms: </label>
-                    <select className={style.input}name="platform"  value={input.platform} onChange={handleSelectPlatform} >
+                    <select className={style.select} name="platforms" id="platforms" value={input.platforms} onChange={handleSelectPlatform} multiple >
                         {
-                            allPlatforms.map((platform, index) =>{
+                            allPlatforms.map((platforms, index) =>{
                                 return (
-                                <option key={index}value={platform}>{platform}</option>
+                                <option key={index}value={platforms}>{platforms}</option>
                             )})
                         }
                     </select>
-                    {errors.platform && <p style ={{color: "black", fontStyle: "italic"}}>{errors.platform}</p>}
+                    {errors.platforms && <p style ={{color: "black", fontStyle: "italic"}}>{errors.platforms}</p>}
                     <ul>
-                    {input.platform.map((platform) => (
-                    <li key={platform}>
-                    {platform}
-                    <button onClick={() => handleDeletePlatform(platform)}>x</button>
+                    {input.platforms.map((platforms) => (
+                    <li key={platforms}>
+                    {platforms}
+                    <button onClick={() => handleDeletePlatform(platforms)}>x</button>
                     </li>
                     ))}
                     </ul>
                     <br />
                     <label htmlFor="">Genres: </label>
-                    <select className={style.input}name="genres" value={input.genres} onChange={handleSelectGenres} >
+                    <select className={style.select} name="genres" id="genres" value={input.genres} onChange={handleSelectGenres} multiple >
                         {
                             genres.map ((genre,index) => {
                               return (
-                                <option key={index}value={genre.name}>{genre.name}</option>
+                                <option key={index}value={genre.id}>{genre.name}</option>
                             )})
                         }
                     </select>
                     {errors.genres && <p style ={{color: "black", fontStyle: "italic"}}>{errors.genres}</p>}
-                    {/* <ul><li>{input.genres.map(genre => genre + ", ")}</li></ul> */}
                     <ul >
                     {input.genres.map((genre) => (
-                    <li key={genre}>
+                      <li key={genre}>
                     {genre}
                     <button onClick={() => handleDeleteGenre(genre)}>x</button>
                     </li>
                     ))}
                     </ul>
                     <br />
-                    <button disabled={hasErrors} className={style.button} type="Submit" onSubmit={() => handleClick()} >Create your videogame</button>
+                    <label htmlFor="">Image: </label>
+                    <input className={style.input}type="text" value={input.image} name="image" placeholder="Add picture URL" onChange={handleChange}/>
+                    {errors.image && <p style ={{color: "black", fontStyle: "italic"}}>{errors.image}</p>}
+                    <br />
+                    <button disabled={hasErrors || !hasInputs} className={style.button} type="Submit" onSubmit={() => handleClick()} >Create your videogame</button>
                 </div>
             </form>
         </div>
     )
   }
-
+  
   
   export default CreateVideogame;
+  
   
