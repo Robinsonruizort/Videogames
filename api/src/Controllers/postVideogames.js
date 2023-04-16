@@ -22,7 +22,6 @@ const postVideogames = async (req, res) => {
             platforms,
         });
 
-
         console.log("Hasta aqui llegamos");
         const genreNames = await Genre.findAll({
             where: {

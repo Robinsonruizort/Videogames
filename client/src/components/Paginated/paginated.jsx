@@ -5,8 +5,8 @@ import style from "./paginated.module.css"
 const Paginated = ({allVideogames, videogamesPerPage, paginated}) => {
     const pageNumbers = []
 
-    for (let index = 0; index <= Math.ceil(allVideogames/videogamesPerPage); index++) {
-        pageNumbers.push(index + 1)
+    for (let index = 1; index <= Math.ceil(allVideogames/videogamesPerPage); index++) {
+        pageNumbers.push(index)
     }
     return(
         <nav >

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getVideogameId } from "../../Redux/actions";
+import { getVideogameId, resetVideogame } from "../../Redux/actions";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import style from "./detailsVideogame.module.css";
@@ -10,10 +10,16 @@ import style from "./detailsVideogame.module.css";
 const VideogameDetail = () => {
 
 const dispatch = useDispatch()
+
 const { id } = useParams();
 useEffect(()=>{
     dispatch(getVideogameId(id))
 }, [dispatch, id])
+
+
+const handleReset = (e) => {
+    dispatch(resetVideogame())
+}
 
 const videogamesDetail = useSelector((state) => state.detail)
 console.log(videogamesDetail);
@@ -31,8 +37,8 @@ console.log(videogamesDetail);
                 <img className={style.img} src={videogamesDetail?.image} alt={videogamesDetail.name} />
             </div>
                 <br />
-                <Link to= "/home">
-                    <button className={style.btn}>Back</button>
+                <Link  to= "/home">
+                    <button  onClick = {handleReset} className={style.btn}>Back</button>
                 </Link>
         </div>
 

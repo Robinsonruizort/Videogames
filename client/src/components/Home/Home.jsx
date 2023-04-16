@@ -15,7 +15,7 @@ const Home = () => {
     const [currentPage, setCurrentPage] = useState(1)
     const [videogamesPerPage, setVideogamesPerPage] = useState(15)
     const [order, setOrder] = useState(" ");
-    const [rating, setRating] = useState(" ")
+    const [rating, setRating] = useState(" ");
 
     const lastVideogame = currentPage * videogamesPerPage
     const firstVideogame = lastVideogame - videogamesPerPage
@@ -37,27 +37,30 @@ const Home = () => {
 
 const getAllVideogames = (e) =>{
     dispatch(getVideogames());
+    setCurrentPage(1)
 }
 
 const handleFilterGenre = (e) => {
     dispatch(filterByGenre(e.target.value))
+    setCurrentPage(1)
 }
 
 
 const handleCreatedBy = (e) => {
     dispatch(filterByCreated(e.target.value))
+    setCurrentPage(1)
 }
 
 const handleSort = (e) => {
     dispatch(orderBy(e.target.value))
-    setCurrentPage(1);
-    setOrder(`order ${e.target.value}`)
+    setOrder(e.target.value)
+    setCurrentPage(1)
 };
 
 const handleRating = (e) => {
     dispatch(orderRating(e.target.value))
-    setCurrentPage(1);
     setRating(e.target.value)
+    setCurrentPage(1)
 };
     return (
         <div>
@@ -69,24 +72,27 @@ const handleRating = (e) => {
             <div>
                 <div className={style.searchFilter}>
                     <div className={style.rating}>
-                        <label className={style.filterLabel} htmlFor="ratingFilter">Order by rating:</label>
+                        {/* <label className={style.filterLabel} htmlFor="ratingFilter">Order by rating:</label> */}
                         <select className={style.opt} id="ratingFilter" onChange={handleRating}>
+                        <option>Order by rating</option>
                         <option value="Highest">Highest</option>
                         <option value="Lowest">Lowest</option>
                         </select>
                     </div>
                 <br />
                 <div className={style.rating}>
-                <label className={style.filterLabel} htmlFor="ratingFilter">Order by name:</label>
+                {/* <label className={style.filterLabel} htmlFor="ratingFilter">Order by name:</label> */}
                 <select className={style.opt} id="ratingFilter" onChange={handleSort}>
+                    <option>Order by name</option>
                 <option value="Ascendant">Ascendant</option>
                 <option value="Descendent">Descendent</option>
                 </select>
                 </div>
                 <br />
                 <div className={style.rating}>
-                <label className={style.filterLabel} htmlFor="ratingFilter">Filter by genres: </label>
+                {/* <label className={style.filterLabel} htmlFor="ratingFilter">Filter by genres: </label> */}
                 <select className={style.opt} id="ratingFilter" onChange={handleFilterGenre}>
+                <option>Filter by genres</option>
                 <option value="All">All genres</option>
                 {allGenres.map((genre) => (
                 <option key={genre.id} value={genre.name}>{genre.name}</option>
@@ -95,8 +101,9 @@ const handleRating = (e) => {
                 </div>
                 <br />
                 <div className={style.rating}>
-                <label className={style.filterLabel} htmlFor="ratingFilter">Filter by source: </label>
+                {/* <label className={style.filterLabel} htmlFor="ratingFilter">Filter by source: </label> */}
                 <select className={style.opt} id="ratingFilter" onChange={handleCreatedBy}>
+                    <option>Filter by source</option>
                     <option value="All">All</option>
                     <option value="From database">From database</option>
                     <option value="From Api">From API</option>

@@ -1,8 +1,6 @@
 import axios from "axios";
-import { GET_VIDEOGAMES, FILTER_BY_GENRE, FILTER_BY_CREATED, GET_VIDEOGAMES_NAME, GET_GENRES, ORDER_BY, GET_VIDEOGAME_ID, ORDER_RATING} from "./actionsTypes"
+import { GET_VIDEOGAMES, FILTER_BY_GENRE, FILTER_BY_CREATED, GET_VIDEOGAMES_NAME, GET_GENRES, ORDER_BY, GET_VIDEOGAME_ID, ORDER_RATING, RESET_VIDEOGAME_DETAIL} from "./actionsTypes"
 
-
-// la primera accion es la de get all characters
 
 const getVideogames = () => {
     try {
@@ -57,6 +55,72 @@ const getVideogamesName = (payload) => {
         }
     }
  }
+ 
+ 
+ const orderBy = (payload) => {
+    return {
+        type: ORDER_BY,
+        payload
+    }
+}
+
+
+const getVideogameId = (id) => {
+    return async function (dispatch) {
+        try {
+            const response = await axios.get(`http://localhost:3001/videogames/${id}`)
+            return dispatch({
+                type: GET_VIDEOGAME_ID,
+                payload: response.data
+            })      
+        }catch (error) {
+            console.log(error.message);
+        }
+    }
+}
+const orderRating = (payload) => {
+    return {
+        type: ORDER_RATING,
+        payload
+    }
+}
+
+const resetVideogame = () => {
+    return {
+        type: RESET_VIDEOGAME_DETAIL,
+    }
+
+}
+export { getVideogames, filterByGenre, filterByCreated, getVideogamesName, getGenres, orderBy, getVideogameId, orderRating, resetVideogame} ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //  const getPlatforms = () => {
 //     return async function(dispatch) {
 //         try {
@@ -70,38 +134,3 @@ const getVideogamesName = (payload) => {
 //         }
 //     }
 //  }
-
-
-//  const postVideogame = (payload) =>{
-//     return async function (){
-//         const response = await axios.post(`http://localhost:3001/videogames/`, payload)
-//     }
-//  }
-
-const orderBy = (payload) => {
-    return {
-        type: ORDER_BY,
-        payload
-    }
-}
-
-const getVideogameId = (id) => {
-    return async function (dispatch) {
-            try {
-            const response = await axios.get(`http://localhost:3001/videogames/${id}`)
-            return dispatch({
-                type: GET_VIDEOGAME_ID,
-                payload: response.data
-            })      
-            }catch (error) {
-            console.log(error.message);
-    }
-}
-}
-const orderRating = (payload) => {
-    return {
-        type: ORDER_RATING,
-        payload
-    }
-}
-export { getVideogames, filterByGenre, filterByCreated, getVideogamesName, getGenres, orderBy, getVideogameId, orderRating} ;

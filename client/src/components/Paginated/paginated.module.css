@@ -1,3 +1,9 @@
+
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 .paginated{
     margin-top: 40px;
     display: flex; flex-direction: row; list-style: none;
@@ -6,6 +12,7 @@
     padding: 0.2rem;
     background-color: black;
     opacity: 80%;
+    margin-right: 40px;
 }
 
 .pag{

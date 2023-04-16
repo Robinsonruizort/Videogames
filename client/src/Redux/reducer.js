@@ -1,4 +1,4 @@
-import {GET_VIDEOGAMES, FILTER_BY_GENRE, FILTER_BY_CREATED, GET_VIDEOGAMES_NAME, GET_GENRES, ORDER_BY, POST_VIDEOGAMES, GET_VIDEOGAME_ID, ORDER_RATING} from "./actionsTypes"
+import {GET_VIDEOGAMES, FILTER_BY_GENRE, FILTER_BY_CREATED, GET_VIDEOGAMES_NAME, GET_GENRES, ORDER_BY, GET_VIDEOGAME_ID, ORDER_RATING, RESET_VIDEOGAME_DETAIL} from "./actionsTypes"
 
 
 const initialState = {
@@ -47,13 +47,6 @@ const reducer = (state = initialState, { type, payload}) => {
                 }
             }
 
-            // case GET_PLATFORMS: {
-            //     return {
-            //         ...state,
-            //         platforms: payload
-            //     }
-            // }
-
             case ORDER_BY:{
                 const sortedByName = payload === "Ascendant" ?
                 state.videogames.sort((a, b) => a.name.localeCompare(b.name)) :
@@ -64,26 +57,28 @@ const reducer = (state = initialState, { type, payload}) => {
                 }
             }
             
-            // case POST_VIDEOGAMES:{
-            //     return {
-            //         ...state
-            //     }
-            // }
-
             case GET_VIDEOGAME_ID: {
                 return {
                     ...state,
                     detail: payload
                 }
             }
-            case ORDER_RATING: 
+            case ORDER_RATING: {
                 const filteredRating = payload === "Highest" ?
-                state.videogames.sort((a, b) => a.rating - b.rating)
-                : state.videogames.sort((a, b) => b.rating - a.rating)
+                state.videogames.sort((a, b) => b.rating - a.rating)
+                : state.videogames.sort((a, b) => a.rating - b.rating)
                 return {
                     ...state,
                     videogames: filteredRating
                 }
+            }
+            case RESET_VIDEOGAME_DETAIL: {
+                return {
+                    ...state,
+                    detail: []
+                }
+            }
+
             default:
                 return state
     }

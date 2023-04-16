@@ -5,15 +5,7 @@ import { getGenres } from "../../Redux/actions";
 import validate from "./validation";
 import style from "./CreateVideogame.module.css";
 import axios from "axios";
-
-
-// const postVideogame = () =>{
-// //     return async function (){
-// //         const response = await axios.post(`http://localhost:3001/videogames/`, payload)
-// //     }
-// //  }
-
-
+const regex = new RegExp(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/);
 
 const CreateVideogame = () => {
     const dispatch = useDispatch()
@@ -40,6 +32,23 @@ const CreateVideogame = () => {
             ...input,
             [e.target.name] : e.target.value
         }))
+
+        if (e.target.name === "image") {
+          if (!regex.test(e.target.value)) {
+            setErrors((errors) => ({
+              ...errors,
+              image: "Please enter a valid image URL",
+            }));
+          }
+        }
+
+
+        // else {
+          //     setErrors((errors) => ({
+          //       ...errors,
+          //       image: "",
+          //     }));
+          //   }
 
     }
 
@@ -87,7 +96,15 @@ const CreateVideogame = () => {
       try {
         const response =  axios.post(`http://localhost:3001/videogames/`, input)
         alert("Videogame created")
-
+        setInput({
+          name: "",
+          description:"",
+          platforms: [],
+          image:"",
+          releaseDate: "",
+          rating: 0.0,
+          genres:[]
+      })
       } catch (error) { 
         window.alert(error.message);
       }
@@ -95,21 +112,6 @@ const CreateVideogame = () => {
 
       const hasErrors = Object.keys(errors).length > 0;
 
-      let hasInputs =false;
-      const inputs = document.querySelectorAll('input[type="text"]');
-      for (let i = 0; i < inputs.length; i++) {
-        if (inputs[i].value.trim() !== '') {
-          hasInputs = true;
-          break;
-        }
-      }
-
-      const handleClick = () => {
-        if (hasErrors) {
-          alert('There are errors in the form. Please check your inputs.');
-        }
-        // handleSubmit();
-      }
       return (
         <div>
             <h1 className={style.create}>Create your videogame</h1>
@@ -120,15 +122,16 @@ const CreateVideogame = () => {
                     {errors.name && <p style ={{ color: "black", fontStyle: "italic"}}>{errors.name}</p>}
                     <br />
                     <label htmlFor="">Description: </label>
-                    <input className={style.input}type="text" value= {input.description} name= "description" placeholder="Add a description" onChange={handleChange}/>
+                    <input className={style.input}type="text" value= {input.description} name= "description" placeholder="Add a description" id="description" onChange={handleChange}/>
                     {errors.description && <p style ={{color: "black", fontStyle: "italic"}}>{errors.description}</p>}
                     <br />
                     <label htmlFor="">ReleaseDate: </label>
-                    <input className={style.input}type="text" value= {input.releaseDate} name="releaseDate" placeholder="YYYY-MM-DD"  onChange={handleChange}/>
+                    <input className={style.input}type="date" value= {input.releaseDate} name="releaseDate" placeholder="YYYY-MM-DD" id="releaseDate" max={new Date().toISOString().split("T")[0]} 
+                    onChange={handleChange}/>
                     {errors.releaseDate && <p style ={{color: "black", fontStyle: "italic"}}>{errors.releaseDate}</p>}
                     <br />
-                    <label htmlFor="">Rating: </label>
-                    <input className={style.input} type="text" value={input.rating} name="rating" placeholder="Add a rating (example: 5.00)" min="0.0" max="5.0" onChange={handleChange}/>
+                    <label htmlFor="">Rating: </label>  
+                    <input className={style.input} type="text" value={input.rating} name="rating" placeholder="Add a rating (example: 5.00)" min="0.0" max="5.0" id="rating" onChange={handleChange}/>
                     {errors.rating && <p style ={{color: "black", fontStyle: "italic"}}>{errors.rating}</p>}
                     <br />
                     <label htmlFor="">Platforms: </label>
@@ -173,7 +176,7 @@ const CreateVideogame = () => {
                     <input className={style.input}type="text" value={input.image} name="image" placeholder="Add picture URL" onChange={handleChange}/>
                     {errors.image && <p style ={{color: "black", fontStyle: "italic"}}>{errors.image}</p>}
                     <br />
-                    <button disabled={hasErrors || !hasInputs} className={style.button} type="Submit" onSubmit={() => handleClick()} >Create your videogame</button>
+                    <button disabled={hasErrors || input.name === ""} className={style.button} type="Submit" >Create your videogame</button>
                 </div>
             </form>
         </div>

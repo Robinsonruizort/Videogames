@@ -15,13 +15,6 @@ const getVideoGames = async (req, res) => {
             attributes: [],
           },
         },
-        // {
-        //   model: Platform,
-        //   attributes: ["name"],
-        //   through: {
-        //     attributes: [],
-        //   },
-        // },
       ],
     });
 

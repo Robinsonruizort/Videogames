@@ -4,6 +4,7 @@ const { Videogame, Genre } = require ("../db")
 const getVideogameId = async (req, res) => {
   const { id } = req.params;
   if (isNaN(id)) {
+    //Since the videogames created were created with an UUID we can make a filter since UUID typeof is NaN
     try {
       const videogame = await Videogame.findByPk(id, ({
         include: [
@@ -13,6 +14,7 @@ const getVideogameId = async (req, res) => {
           through: {
             attributes: [],
           },
+          //we use the FindbyPK, to look in the database, any videogame that is associated to the id, and we include the Genre to bring teh genre that is associated thought he relational table
         },
       ],
     }));

@@ -15,7 +15,6 @@ routes.get("/videogames/:id", getVideogameId); // it brings the videogame associ
 routes.get("/videogame/name?", getVideogamesName); //It brings the data entered by query
 routes.get("/videogames", getVideoGames); // it brings all the videogames
 routes.get("/genres", getGenres);
-// routes.get("/platforms", getPlatforms);
 
 routes.post("/videogames", postVideogames);
 
