@@ -118,7 +118,7 @@ const CreateVideogame = () => {
             <form onSubmit={handleSubmit}>
                 <div className={style.content}>
                     <label htmlFor="">Name: </label>
-                    <input className={style.input}type="text" value={input.name} name= "name" placeholder="Add the videgomae name" id="name" onChange={handleChange} />
+                    <input className={style.input}type="text" value={input.name} name= "name" placeholder="Add the videogame name" id="name" onChange={handleChange} />
                     {errors.name && <p style ={{ color: "black", fontStyle: "italic"}}>{errors.name}</p>}
                     <br />
                     <label htmlFor="">Description: </label>

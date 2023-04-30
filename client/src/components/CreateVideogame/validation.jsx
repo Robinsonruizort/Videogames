@@ -1,7 +1,7 @@
 const validate = (input) => {
   let errors = {};
   
-  if (!input.name) {
+  if (!input.name )  {
     errors.name = "Videogame name is required";
   }
   if (!input.description) {

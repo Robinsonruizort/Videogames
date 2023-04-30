@@ -42,3 +42,23 @@ conn.sync({ force: true }).then(() => {
       });
     });
 });
+
+
+// aca vamos a replicar lo anterior, primero entendamos el flujo, tengo el conn.sync para conect el force sync true carga la base de datos cada vez que se levanta el servidor
+//y luego utilizamos promesas
+
+// conn.sync({force: true}).then(() => {
+//   axios.get(`https://api.rawg.io/api/genres?key=6012f599e22a4d5eb73f8f2311367051`)
+//   .then (response => {
+//     const apiResponse = response.data;
+
+//     apiResponse.results.forEach(async (genre)=> {
+//       await Genre.findOrCreate({
+//         where : {
+//           name: genre.name,
+//           id:genre.id
+//         }
+//       })
+//     })
+//   })
+// })

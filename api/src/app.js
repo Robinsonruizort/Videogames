@@ -7,8 +7,6 @@ const routes = require('./routes/index.js');
 require('./db.js');
 
 const server = express();
-
-
 server.name = 'API';
 
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
@@ -24,7 +22,9 @@ server.use((req, res, next) => {
 });
 
 server.use('/', routes);
+//server.use('/hola', routes); esto es para entender el ejemplo de modularizacion de rutas
 server.use(express.json());
+//el middleware para detectar JSON
 
 // Error catching endware.
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars

@@ -14,7 +14,7 @@ const getVideogameId = async (req, res) => {
           through: {
             attributes: [],
           },
-          //we use the FindbyPK, to look in the database, any videogame that is associated to the id, and we include the Genre to bring teh genre that is associated thought he relational table
+          //we use the FindbyPK to look in the database for any videogame that is associated to the id, and we include the Genre to bring the genre that is associated through the relational table
         },
       ],
     }));
@@ -38,9 +38,12 @@ const getVideogameId = async (req, res) => {
         try {
         axios.get(`https://api.rawg.io/api/games/${id}?key=6012f599e22a4d5eb73f8f2311367051`)
         .then((response) => {
+          // puedo crear una const video = response.data;
         let genres = response.data.genres.map((genre) => genre.name).join(", ");
         let platforms = response.data.platforms.map((platform) => platform.platform.name).join(", ");
         const videogame = {
+          //const videogame
+          //id: video.id
           id: response.data.id,
           name: response.data.name,
           platforms,

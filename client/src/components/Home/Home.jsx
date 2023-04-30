@@ -112,7 +112,11 @@ const handleRating = (e) => {
                 </div>
                 <br />
                 <div className={style.Card}>
-                    {currentVideogames.map((videogame) => (
+
+                    {
+                    currentVideogames.length === 0 ? (
+                    <img src="https://media4.giphy.com/media/DqqHabAaTHRII/200w.gif?cid=6c09b952jdn4ggo9noygegh1fomc76exzu4bfbg9a1g184qa&ep=v1_gifs_search&rid=200w.gif&ct=g" alt="mario bros loading image" />
+                    ) :  ( currentVideogames.map((videogame) => (
                     <div key={videogame.id}>
                     <CardVideogame
                         id={videogame.id}
@@ -120,7 +124,7 @@ const handleRating = (e) => {
                         image={videogame.image}
                         genres={videogame.genres}
                     />
-                </div>))}
+                </div>)))}
                 </div>
                 <Paginated
                     videogamesPerPage = {videogamesPerPage}
