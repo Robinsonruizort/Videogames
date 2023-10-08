@@ -20,7 +20,7 @@ const SearchBar = () => {
         e.preventDefault();
         dispatch(getVideogamesName(name));
         setName("");
-        console.log("Search button clicked");
+        // console.log("Search button clicked");
 
         const GameExist = videogames.some((videogame) => videogame.name.toLowerCase () === name.toLowerCase());
 

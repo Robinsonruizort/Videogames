@@ -5,8 +5,8 @@ body {
 }
 .Card {
     color: aliceblue;
-    width: 1300px;
-    height: 450px;
+    width: fit-content;
+    height: fit-content;
     margin: 5px;   
     background-color: black;
     background-size: 100%;
@@ -21,10 +21,8 @@ body {
 
 .img{
     padding-top: 30px;
-    max-width: 60%;
-    max-height: 70%;
-    top: 0;
-    left: 0;
+    max-width: 600px;
+    max-height: 480px;
 }
 .general{
     display: inline-block;
@@ -39,8 +37,8 @@ body {
     outline: none;
     border: 1px solid silver;
     border-radius: 30px;
-    text-align: center;
     background-color: white;
+    margin-top: 20px;
     }
     
     .btn:hover {

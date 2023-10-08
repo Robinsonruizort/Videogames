@@ -24,6 +24,7 @@ const handleReset = (e) => {
 const videogamesDetail = useSelector((state) => state.detail)
 console.log(videogamesDetail);
     return (
+
         <div className={style.general}>
             <div className={style.Card}>
                 <div className={style.information}>
@@ -36,10 +37,9 @@ console.log(videogamesDetail);
                 </div>
                 <img className={style.img} src={videogamesDetail?.image} alt={videogamesDetail.name} />
             </div>
-                <br />
-                <Link  to= "/home">
-                    <button  onClick = {handleReset} className={style.btn}>Back</button>
-                </Link>
+            <Link  to= "/home">
+                <button  onClick = {handleReset} className={style.btn}>Back</button>
+            </Link>
         </div>
 
     )
